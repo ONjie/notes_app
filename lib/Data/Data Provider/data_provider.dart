@@ -10,9 +10,9 @@ static late DbCollection notesCollection;
 /// Initialize Mongodb and connect to your database
 static initDatabaseConnection() async{
   /// Your mongoDB connection url
- Db db = await Db.create("mongodb+srv://marouane1602:3903085@cluster0.gxhjute.mongodb.net/Notes_Database?retryWrites=true&w=majority");
+ Db db = await Db.create("mongodb+srv://username:password@cluster0.gxhjute.mongodb.net/database_name?retryWrites=true&w=majority");
   await db.open();
-  notesCollection = db.collection("notes");
+  notesCollection = db.collection(collection_name);
 }
 
 /// Creates a new note document with a unique _id
