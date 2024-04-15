@@ -1,6 +1,6 @@
 part of 'notes_bloc.dart';
 
-enum NotesStatus {initial, loading, notesLoaded, noteLoaded, added, deleted, updated, error}
+enum NotesStatus {initial, loading, notesLoaded, empty,  noteLoaded, added, deleted, updated, error}
 
 class NotesState extends Equatable {
   const NotesState({required this.status, this.notes, this.note, this.message,});

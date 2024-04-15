@@ -56,7 +56,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     } else {
       emit(
         const NotesState(
-          status: NotesStatus.error,
+          status: NotesStatus.empty,
           message: 'No notes yet!',
         ),
       );

@@ -75,7 +75,7 @@ class _NotesScreenState extends State<NotesScreen> {
                   return NotesGridviewWidget(notes: state.notes!);
 
                 }
-                if(state.status == NotesStatus.error){
+                if(state.status == NotesStatus.empty){
                   return  Center(
                     child: Text(
                      state.message!,
