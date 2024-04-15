@@ -1,6 +1,6 @@
 # notes_app
 
-Notes App is an application for creating, updating and deleting your notes.
+Notes App is an application for adding, updating and deleting your notes.
 
 ## RESULTS:
 

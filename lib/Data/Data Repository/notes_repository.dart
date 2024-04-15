@@ -1,35 +1,64 @@
-import 'package:mongo_dart/mongo_dart.dart';
+import '../Data Provider/database.dart';
+import '../Models/note_model.dart';
 
-import '../Data Provider/data_provider.dart';
-import '../Models/note.dart';
+class NotesRepository {
+  final appDatabase = AppDatabase();
 
-class NotesRepository{
-
-  final DataProvider _dataProvider = DataProvider();
-
-  Future<void> insertNotes({required Note note}) async{
-    await _dataProvider.insertNote(note: note);
+  Future<int> addNote({required NoteModel note}) async {
+    late int id = 0;
+    try {
+      id = await appDatabase.addNote(note: note);
+    } catch (e) {
+      e.toString();
+    }
+    return Future.value(id);
   }
 
-  Future<List<Note>> getNotes() async{
-    final notes = await _dataProvider.getNotes();
-    return notes;
+  Future<List<NoteModel>> fetchNotes() async {
+    late List<NoteModel> notes = [];
+    try {
+      notes = await appDatabase.fetchNotes();
+    } catch (e) {
+      e.toString();
+    }
+
+    return Future.value(notes);
   }
 
-  Future<Note> getNoteById({required ObjectId id}) async{
-    final note = await _dataProvider.getNoteById(id: id);
-    return note;
+  Future<NoteModel> fetchNoteById({required int noteId}) async {
+    late NoteModel note = NoteModel(
+        id: -1, title: '', description: '', creationTime: DateTime.now());
 
+    try {
+      note = await appDatabase.fetchNote(noteId: noteId);
+    } catch (e) {
+      e.toString();
+    }
+
+    return Future.value(note);
   }
 
-  Future<void> updateNote({required Note note}) async{
-    await _dataProvider.updateNote(note: note);
+  Future<bool> updateNote({required NoteModel note}) async {
+    late bool isUpdated = false;
+
+    try {
+      isUpdated = await appDatabase.updateNote(note: note);
+    } catch (e) {
+      e.toString();
+    }
+
+    return Future.value(isUpdated);
   }
 
-  Future<void> deleteANote({required ObjectId id}) async{
-    await _dataProvider.deleteNote(id: id);
+  Future<bool> deleteNote({required int noteId}) async {
+    late bool isDeleted = false;
+
+    try {
+      isDeleted = await appDatabase.deleteNote(noteId: noteId);
+    } catch (e) {
+      e.toString();
+    }
+
+    return Future.value(isDeleted);
   }
-
-
-
 }

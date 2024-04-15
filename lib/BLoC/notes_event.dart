@@ -5,42 +5,39 @@ abstract class NotesEvent extends Equatable {
 }
 
 class AddNoteEvent extends NotesEvent {
-  final ObjectId id;
-  final String title;
-  final String description;
-  final DateTime createdTime;
+  final NoteModel note;
 
-  const AddNoteEvent({required this.id,required this.title, required this.description, required this.createdTime,});
+  const AddNoteEvent({required this.note});
 
   @override
-  List<Object?> get props => [title, description, createdTime];
+  List<Object?> get props => [note];
 }
 
 class UpdateNoteEvent extends NotesEvent {
-  final Note note;
+  final NoteModel note;
   const UpdateNoteEvent({required this.note});
   @override
   List<Object?> get props => [note];
 }
 
-class GetAllNotesEvent extends NotesEvent {
-  const GetAllNotesEvent();
+class FetchNotesEvent extends NotesEvent {
+  const FetchNotesEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class GetANoteEvent extends NotesEvent {
-  final ObjectId id;
-  const GetANoteEvent({required this.id});
+class FetchNoteByIdEvent extends NotesEvent {
+  final int noteId;
+  const FetchNoteByIdEvent({required this.noteId});
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [noteId];
 }
 
 class DeleteNoteEvent extends NotesEvent {
-  final ObjectId id;
-  const DeleteNoteEvent({required this.id});
+  final int noteId;
+  const DeleteNoteEvent({required this.noteId});
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [noteId];
 }
